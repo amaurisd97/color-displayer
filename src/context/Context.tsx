@@ -1,13 +1,16 @@
 import { createContext, useState } from 'react'
 
-const input = ''
-const setInput: React.Dispatch<React.SetStateAction<string>> = (value: React.SetStateAction<string>) => {
-  value
+interface ContextValues {
+  input: string
+  setInput: React.Dispatch<React.SetStateAction<string>>
 }
-export const Context = createContext({ input, setInput })
+
+export let Context: React.Context<ContextValues>
 
 export const ContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [input, setInput] = useState('')
+  Context = createContext({ input, setInput })
+
   const inputHandler = {
     input,
     setInput
